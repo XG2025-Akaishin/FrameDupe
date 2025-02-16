@@ -36,7 +36,7 @@ public final class FrameDupe extends JavaPlugin {
 
         @EventHandler
         private void onFrameBreak(EntityDamageByEntityEvent event) {
-            if (event.getEntityType() == EntityType.ITEM_FRAME) {
+            if (event.getEntityType() == EntityType.ITEM_FRAME || event.getEntityType() == EntityType.GLOW_ITEM_FRAME) {
                 int rng = (int)Math.round(Math.random() * 100);
                 if (rng < getConfig().getInt("probability-percentage")) {
                     event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), ((ItemFrame) event.getEntity()).getItem());
@@ -44,22 +44,6 @@ public final class FrameDupe extends JavaPlugin {
             }
         }
 
-    }
-
-
-    private final class GlowFrameDupeListener implements Listener {
-
-
-
-        @EventHandler
-        private void onFrameBreak(EntityDamageByEntityEvent event) {
-            if (event.getEntityType() == EntityType.GLOW_ITEM_FRAME) {
-                int rng = (int)Math.round(Math.random() * 100);
-                if (rng < getConfig().getInt("probability-percentage-new")) {
-                    event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), ((ItemFrame) event.getEntity()).getItem());
-                }
-            }
-        }
     }
 
     private final class ReloadCommand implements CommandExecutor {
